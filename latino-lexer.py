@@ -55,11 +55,19 @@ class Lexer():
     
     
     symbols_regex_dict = {
-        'assign':r'<-',
-        'concatenate':r'\.\.',
+        'and':r'&&',
+        'or':r'\|\|',
+        'concat':r'\.\.',
+        'plus_assign':r'\+=',
+        'minus_assign':r'\-=',
+        'times_assign':r'\*=',
+        'div_assign':r'/=',
+        'mod_assign':r'%=',
+        'increment':r'\+\+',
+        'decrement':r'\-\-',
         'period':r'\.',
-        'comma':r',',
-        'colon':r':',
+        #'comma':r',',
+        #'colon':r':',
         'closing_bra':r'\]',
         'opening_bra':r'\[',
         'closing_par':r'\)',
@@ -69,12 +77,18 @@ class Lexer():
         'times':r'\*',
         'div':r'/',
         'power':r'\^',
-        'equal':r'=',
-        'neq':r'<>',
+        'mod':r'%',
+        'equal':r'==',
+        'neq':r'!=',
         'leq':r'<=',
         'geq':r'>=',
         'greater':r'>',
         'less':r'<',
+        'regex':r'~=',
+        'assign':r'=',
+        'not':r'!',
+        
+        
     }
     
     def match_symbol(self,code,line,end_index,position):

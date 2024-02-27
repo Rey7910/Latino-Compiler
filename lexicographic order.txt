@@ -1,1 +1,7 @@
+
+
 escribir
+fin
+si
+sino
+
