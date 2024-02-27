@@ -56,6 +56,7 @@ class Lexer():
     
     symbols_regex_dict = {
         'assign':r'<-',
+        'concatenate':r'\.\.',
         'period':r'\.',
         'comma':r',',
         'colon':r':',
