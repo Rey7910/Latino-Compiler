@@ -1,8 +1,8 @@
 '''
-Analizador léxico - Lenguaje de Programación LPP
+Analizador léxico - Lenguaje de Programación Latino
 Reinaldo Toledo Leguizamón
 Monitoría de Lenguajes de programación
-2023-2
+2024-1
 
 '''
 
@@ -206,7 +206,9 @@ class Lexer():
                 break
             
             # Matching comments of single line denoted by //
-            if(len(code)>=2 and code[0]=='/'):
+            if(code[0]=='#'):
+                break
+            elif(len(code)>=2 and code[0]=='/'):
                 if(code[1]=='/'):
                     break
                 elif(code[1]=='*'):
