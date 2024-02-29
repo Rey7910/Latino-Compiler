@@ -124,10 +124,13 @@ class Lexer():
     
     def match_string(self,code,line,end_index,position):
         
+        #string_match = r'\"(.*?)\"|\'(.*?)\''
         string_match = r'\"(.*?)\"'
         
-        if re.match(string_match, code, re.IGNORECASE) != None:
-            self.report_token('tkn_str',re.match(string_match, code).group().replace('\"',''),line,position+1,False)
+        
+        if re.match(string_match, code) != None:
+            print("match: ",re.match(string_match, code))
+            self.report_token('tkn_str',re.match(string_match, code).group()[1:-1],line,position+1,False)
             end_index = re.match(string_match, code).end()
             position+=end_index
         
@@ -275,10 +278,7 @@ class Lexer():
                 elif(code[0]=='_'):
                     end_index = self.match_id(code,line,end_index,position) #could be commented
                 
-                elif(code[0]=='\''):
-                    end_index= self.match_char(code,line,end_index,position)
-                
-                elif(code[0]=='\"'):
+                elif(code[0]=='\"' or code[0]=='\''):
                     end_index = self.match_string(code,line,end_index,position)
                     
                 elif(re.match(r'[0-9]',code[0])!=None):
