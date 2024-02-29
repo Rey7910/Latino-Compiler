@@ -7,7 +7,6 @@ defecto
 desde
 elegir
 en
-error
 escribir
 falso
 fin
