@@ -147,7 +147,7 @@ class Lexer():
             position+=end_index
         
         elif re.match(integer_match, code) != None:
-            self.report_token('tkn_integer',re.match(integer_match, code).group(),line,position+1,False)
+            self.report_token('tkn_real',re.match(integer_match, code).group(),line,position+1,False)
             end_index = re.match(integer_match, code).end()
             position+=end_index
         
@@ -157,7 +157,7 @@ class Lexer():
         
         char_match = r'\'(.?)\''
         
-        if re.match(char_match, code, re.IGNORECASE) != None:
+        if re.match(char_match, code) != None:
             self.report_token('tkn_char',re.match(char_match, code).group().replace('\'',''),line,position+1,False)
             end_index = re.match(char_match, code).end()
             position+=end_index
@@ -174,9 +174,9 @@ class Lexer():
         
         id_match = r'[a-zA-Z_][0-9a-zA-Z_]*'
         
-        if re.match(id_match, code, re.IGNORECASE) != None:
-            self.report_token('id',re.match(id_match, code, re.IGNORECASE).group().lower(),line,position+1,False)
-            end_index = re.match(id_match, code, re.IGNORECASE).end()
+        if re.match(id_match, code) != None:
+            self.report_token('id',re.match(id_match, code).group(),line,position+1,False)
+            end_index = re.match(id_match, code).end()
             position+=end_index
         
         return end_index
@@ -189,10 +189,10 @@ class Lexer():
             
         for key in self.regex_dict:
             
-            if re.match(self.regex_dict[key], code, re.IGNORECASE) != None:
+            if re.match(self.regex_dict[key], code) != None:
 
                 self.report_token(key,key,line,position+1,True)
-                end_index = re.match(self.regex_dict[key], code, re.IGNORECASE).end()
+                end_index = re.match(self.regex_dict[key], code).end()
                 position+=end_index
                 found=True
                 break
