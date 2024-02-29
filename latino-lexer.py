@@ -319,17 +319,17 @@ class Lexer():
 
 try:
     line=1
-    Lpp_lexer = Lexer()
+    Latino_lexer = Lexer()
     while True:
         current_line = input()
-        Lpp_lexer.analize(current_line,line)
+        Latino_lexer.analize(current_line,line)
         
-        if(Lpp_lexer.error==True):
+        if(Latino_lexer.error==True):
             break
         line+=1
         
 except EOFError:
     EOF=True
     
-    if(EOF==True and Lpp_lexer.block_comment==True):
-        Lpp_lexer.report_error(Lpp_lexer.block_comment_line,Lpp_lexer.block_comment_position+1)
+    if(EOF==True and Latino_lexer.block_comment==True):
+        Latino_lexer.report_error(Latino_lexer.block_comment_line,Latino_lexer.block_comment_position+1)
