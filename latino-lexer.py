@@ -142,7 +142,7 @@ class Lexer():
         integer_match = r'[0-9]+'
         
         if re.match(real_match, code) != None:
-            self.report_token('tkn_integer',re.match(real_match, code).group(),line,position+1,False)
+            self.report_token('tkn_real',re.match(real_match, code).group(),line,position+1,False)
             end_index = re.match(real_match, code).end()
             position+=end_index
         
