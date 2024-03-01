@@ -125,8 +125,7 @@ class Lexer():
     
     def match_string(self,code,line,end_index,position):
         
-        string_match = r'\"(.*?)\"|\'(.*?)\''
-        #string_match = r'\"(.*?)\"'
+        string_match = r'\"(.*?[^\\])\"|\'(.*?[^\\])\''
         
         
         if re.match(string_match, code) != None:
