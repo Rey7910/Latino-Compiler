@@ -26,6 +26,7 @@ otro
 para
 poner
 fin
+rango
 repetir
 ret
 retornar

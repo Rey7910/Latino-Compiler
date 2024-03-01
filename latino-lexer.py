@@ -46,15 +46,16 @@ class Lexer():
     'para':r'\bpara\b(?![\w_])',
     'poner':r'\bponer\b(?![\w_])',
     'fin':r'\bfin\b(?![\w_])',
+    'rango':r'\brango\b(?![\w_])',
     'repetir':r'\brepetir\b(?![\w_])',
     'ret':r'\bret\b(?![\w_])',
     'retornar':r'\bretornar\b(?![\w_])',
     'retorno':r'\bretorno\b(?![\w_])',
-    'romper':r'\bverdadero\b(?![\w_])',
-    'si':r'\bverdadero\b(?![\w_])',
-    'sino':r'\bverdadero\b(?![\w_])',
-    'tipo':r'\bverdadero\b(?![\w_])',
-    'verdadero':r'\by\b(?![\w_])',
+    'romper':r'\bromper\b(?![\w_])',
+    'si':r'\bsi\b(?![\w_])',
+    'sino':r'\bsino\b(?![\w_])',
+    'tipo':r'\btipo\b(?![\w_])',
+    'verdadero':r'\bverdadero\b(?![\w_])',
     }
     
     
@@ -124,12 +125,12 @@ class Lexer():
     
     def match_string(self,code,line,end_index,position):
         
-        #string_match = r'\"(.*?)\"|\'(.*?)\''
-        string_match = r'\"(.*?)\"'
+        string_match = r'\"(.*?)\"|\'(.*?)\''
+        #string_match = r'\"(.*?)\"'
         
         
         if re.match(string_match, code) != None:
-            print("match: ",re.match(string_match, code))
+            #print("match: ",re.match(string_match, code))
             self.report_token('tkn_str',re.match(string_match, code).group()[1:-1],line,position+1,False)
             end_index = re.match(string_match, code).end()
             position+=end_index
