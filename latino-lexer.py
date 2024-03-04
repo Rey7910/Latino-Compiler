@@ -87,7 +87,7 @@ class Lexer():
         'mod':r'%',
         'equal':r'==',
         'neq':r'!=',
-        'angle_neq':r'<>',
+        #'angle_neq':r'<>',
         'leq':r'<=',
         'geq':r'>=',
         'greater':r'>',
