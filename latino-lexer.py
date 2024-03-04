@@ -236,34 +236,37 @@ class Lexer():
                 if(code[1]=='/'):
                     break
                 elif(code[1]=='*'):
-                    # Match block comment
+                    #print("found block comment: ",code)
                     self.block_comment=True
                     self.block_comment_line=line
                     self.block_comment_position=position
                     code = code[2:]
+                    #print("found block comment after cut: ",code)
                     position+=2
+
                     
             if(len(code)>=2 and code[0]=='*'):
                 # Close block comment
                 if(code[1]=='/'):
+                    #print("code after block comment: ",code)
                     self.block_comment=False
                     self.block_comment_line=0
                     self.block_comment_position=0
                     code = code[2:]
                     position+=2
                     i=0
+                    #print("cut code after block comment: ",code)
+
                     
                     if(len(code)>0):
-                    #Recover the next char different to a blank space
-                        while(code[i]==' '):
-                            i+=1;
-                            position+=1;
-                            if(i==len(code)):
-                                break
-                        code = code[i:]
+        
+                        if(code[0]==' '):
+                            continue
             
             if(len(code)==0):
                 break
+           
+
                     
             
             #print("Code by this iteration: ",code)
