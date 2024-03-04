@@ -123,7 +123,7 @@ class Lexer():
     
     def match_string(self,code,line,end_index,position):
         
-        string_match = r'\"(.*?[^\\])\"|\'(.*?[^\\])\''
+        string_match = r'\"(.*?[^\\])\"|\'(.*?[^\\])\'|\"\"|\'\''
         
         
         if re.match(string_match, code) != None:
@@ -230,10 +230,11 @@ class Lexer():
                 break
             
             # Matching comments of single line denoted by //
-            if(code[0]=='#'):
+            if(code[0]=='#' and self.block_comment==False):
                 break
             elif(len(code)>=2 and code[0]=='/'):
-                if(code[1]=='/'):
+                if(code[1]=='/' and self.block_comment==False):
+                    
                     break
                 elif(code[1]=='*'):
                     #print("found block comment: ",code)
