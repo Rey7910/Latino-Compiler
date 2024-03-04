@@ -32,7 +32,6 @@ class Lexer():
     'fin':r'\bfin\b(?![\w_])',
     'fun':r'\bfun\b(?![\w_])',
     'funcion':r'\bfuncion\b(?![\w_])',
-    'global':r'\bglobal\b(?![\w_])',
     'hasta':r'\bhasta\b(?![\w_])',
     'imprimir':r'\bimprimir\b(?![\w_])',
     'imprimirf':r'\bimprimirf\b(?![\w_])',
