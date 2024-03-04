@@ -35,7 +35,6 @@ class Lexer():
     'hasta':r'\bhasta\b(?![\w_])',
     'imprimir':r'\bimprimir\b(?![\w_])',
     'imprimirf':r'\bimprimirf\b(?![\w_])',
-    'incluir':r'\bincluir\b(?![\w_])',
     'leer':r'\bleer\b(?![\w_])',
     'limpiar':r'\blimpiar\b(?![\w_])',
     'mientras':r'\bmientras\b(?![\w_])',
