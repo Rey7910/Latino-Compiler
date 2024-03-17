@@ -47,7 +47,6 @@ class Parser():
         ],
         'S_M':[
             ['S_ME','S'],
-            ['empty']
         ],
         'FUN':[
             ['TKN_FUN','id','tkn_opening_par','AR_FUN','tkn_closing_par','OP_FUN','fin']
