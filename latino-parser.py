@@ -293,11 +293,11 @@ class Parser():
 
 
     def analize(self,token):
-        print("*************************** Next Token *******************")
-        self.showTokenInfo(token)
+        #print("*************************** Next Token *******************")
+        #self.showTokenInfo(token)
         #print("Prediction set before the match algorithm",self.prediction_set)
         match=False
-        print("Stack before the match algorithm: ",self.stack)
+        #print("Stack before the match algorithm: ",self.stack)
         
         #print("******************** Starting match process *******************")
     
