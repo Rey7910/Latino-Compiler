@@ -43,7 +43,8 @@ class Parser():
             ['L_C'],
             ['S_C'],
             ['A'],
-            ['CO']
+            ['CO'],
+            ['romper']
         ],
         'S_M':[
             ['S_ME','S'],
