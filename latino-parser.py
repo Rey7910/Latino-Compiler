@@ -143,7 +143,15 @@ class Parser():
             ['defecto']
         ],
         'A':[
-            ['id','AC']
+            ['id','AC_P']
+        ],
+
+        'AC_P':[
+            ['tkn_period','id','AC'],
+            ['tkn_opening_bra','EXP','tkn_closing_bra','AC'],
+            ['tkn_comma','id','AC'],
+            ['tkn_opening_par','ARGS_G','tkn_closing_par'],
+            ['EFF'],
         ],
         
         'AC':[
