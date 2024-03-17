@@ -100,6 +100,17 @@ class Parser():
         'F_L':[
             ['para','id','en','rango','tkn_opening_par','ARGS','tkn_closing_par','S_M','fin'],
         ],
+        'ARGS':[
+            ['EXP','ARGS_2'],
+        ],
+        'ARGS_2':[
+            ['tkn_comma','EXP','ARGS_3'],
+            ['empty']
+        ],
+        'ARGS_3':[
+            ['tkn_comma','EXP','ARGS_3'],
+            ['empty']
+        ],
         'W_L':[
             ['mientras','EXP','S_M','fin'],
         ],
@@ -132,16 +143,15 @@ class Parser():
             ['defecto']
         ],
         'A':[
-            ['id','AC','EFF']
+            ['id','AC']
         ],
+        
         'AC':[
-            ['tkn_period','id','AC','AC_1'],
-            ['tkn_opening_bra','EXP','tkn_closing_bra','AC','AC_1'],
-            ['AC_1'],
-            ['empty']
-        ],
-        'AC_1':[
+            ['tkn_period','id','AC'],
+            ['tkn_opening_bra','EXP','tkn_closing_bra','AC'],
             ['tkn_comma','id','AC'],
+            ['tkn_opening_par','ARGS_G','tkn_closing_par'],
+            ['EFF'],
             ['empty']
         ],
         'ASGBL':[
@@ -152,8 +162,12 @@ class Parser():
             ['IN_DEC']
         ],
         'CONT':[
-            ['EXP'],
+            ['EXP','ACR_1'],
             ['leer','tkn_opening_par','tkn_closing_par']
+        ],
+        'ACR_1':[
+            ['tkn_comma','EXP'],
+            ['empty']
         ],
         'CO':[
             ['si','EXP','S_M','CO_1','fin']
