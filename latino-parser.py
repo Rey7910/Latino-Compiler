@@ -348,6 +348,8 @@ class Parser():
                             self.stack.append(i)
                     
                     #print("Updated stack: ",self.stack)
+                    if(len(self.stack)==0):
+                        self.prediction_set.add('final de archivo')
                 
                 
                     
