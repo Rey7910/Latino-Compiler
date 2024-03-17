@@ -45,15 +45,19 @@ class Parser():
             ['A'],
             ['CO']
         ],
+        'S_M':[
+            ['S_ME','S'],
+            ['empty']
+        ],
         'FUN':[
-            ['TKN_FUN','tkn_id','tkn_opening_par','AR_FUN','tkn_closing_par','OP_FUN','fin']
+            ['TKN_FUN','id','tkn_opening_par','AR_FUN','tkn_closing_par','OP_FUN','fin']
         ],
         'AR_FUN':[
-            ['tkn_id','AR_FUN2'],
+            ['id','AR_FUN2'],
             ['empty']
         ],
         'AR_FUN2':[
-            ['tkn_comma','tkn_id','AR_FUN2'],
+            ['tkn_comma','id','AR_FUN2'],
             ['empty']
         ],
         'OP_FUN':[
@@ -92,13 +96,13 @@ class Parser():
             ['DW_L']
         ],
         'F_L':[
-            ['para','tkn_id','en','rango','tkn_opening_par','ARGS','tkn_closing_par','S_M','fin'],
+            ['para','id','en','rango','tkn_opening_par','ARGS','tkn_closing_par','S_M','fin'],
         ],
         'W_L':[
             ['mientras','EXP','S_M','fin'],
         ],
         'D_L':[
-            ['desde','tkn_opening_par','tkn_id','AC','AS_OP','EXP','tkn_semicolon','EXP','tkn_semicolon','A','tkn_closing_par','S_M','fin']
+            ['desde','tkn_opening_par','id','AC','AS_OP','EXP','tkn_semicolon','EXP','tkn_semicolon','A','tkn_closing_par','S_M','fin']
         ],
         'DW_L':[
             ['repetir','S_M','hasta','EXP'],
@@ -129,16 +133,16 @@ class Parser():
             ['id','AC','EFF']
         ],
         'AC':[
-            ['tkn_period','tkn_id','AC','AC_1'],
+            ['tkn_period','id','AC','AC_1'],
             ['tkn_opening_bra','EXP','tkn_closing_bra','AC','AC_1'],
             ['empty']
         ],
         'AC_1':[
-            ['tkn_comma','tkn_id','AC'],
+            ['tkn_comma','id','AC'],
             ['empty']
         ],
         'ASGBL':[
-            ['tkn_id','AC_EX']
+            ['id','AC_EX']
         ],
         'EFF':[
             ['AS_OP','CONT'],
@@ -221,7 +225,7 @@ class Parser():
             ['tkn_not','TE'],
             ['tkn_minus','TE'],
             ['VAL'],
-            ['tkn_id','TE_ID'],
+            ['id','TE_ID'],
             ['BN'],
             ['DIC'],
             ['LIST']
@@ -298,9 +302,15 @@ class Parser():
         
         while(match==False):
           
-            if(len(self.stack) < 1):
+            if(len(self.stack) < 1 and EOF==False):
                 self.error=True
+                
                 self.reportError(token)
+                break
+
+            elif(len(self.stack) < 1 and EOF==True):
+                self.error=True
+                print("El analisis sintactico ha finalizado exitosamente.")
                 break
             
             current_element = self.stack.pop()
@@ -323,7 +333,7 @@ class Parser():
                 #print("Updated prediction set: ",self.prediction_set)
                 
                 if(rule=='error'):
-                    #print("Error sintáctico")
+                    #print("Error sintáctico -> A punto de reportar error")
                     self.error=True
                     self.reportError(token)
                     break
@@ -347,6 +357,7 @@ class Parser():
                     self.prediction_set.clear()
                     break
                 else:
+                    #print("No way, error")
                     self.error = True
                     self.reportError(token)
                     break
@@ -734,6 +745,10 @@ class Lexer():
         
         
     }
+
+    def __init__(self,parser):
+        
+        self.parser = parser
     
     def match_symbol(self,code,line,end_index,position):
         
@@ -934,6 +949,9 @@ class Lexer():
             
             if(self.error==True):
                 break
+
+            if(self.parser.error == True):
+                break
             
             code = code[end_index:]
             
@@ -945,11 +963,19 @@ class Lexer():
                 break
             
     def report_token(self,token,lexem,line,position,key_word):
-        
+        '''
         if(key_word):
             print("<{},{},{}>".format(token,line,position))
         else:
             print("<{},{},{},{}>".format(token,lexem,line,position))
+
+        current_token = Token(token,lexem,line,position)
+
+        '''
+
+        current_token = Token(token,lexem,line,position)
+        
+        self.parser.analize(current_token)
     
     def report_error(self,line,position):
         self.error=True
@@ -984,7 +1010,7 @@ except EOFError:
     
     if(EOF==True and len(Lpp_lexer.parser.stack)>0):
         #print("Error sintáctico en final de archivo")
-        
+        #print("posible error sintactico - pila llena: ",Lpp_lexer.parser.stack)
         EOF_tkn= Token('EOF','EOF',line,1)
         
         Lpp_lexer.parser.analize(EOF_tkn)
