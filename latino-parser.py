@@ -240,8 +240,8 @@ class Parser():
             ['empty']
         ],
         'IN_DEC':[
-            ['tkn_plus','tkn_plus'],
-            ['tkn_minus','tkn_minus']
+            ['tkn_increment'],
+            ['tkn_decrement']
         ],
         'OP_A':[
             ['tkn_minus'],
@@ -249,7 +249,8 @@ class Parser():
             ['tkn_div'],
             ['tkn_times'],
             ['tkn_power'],
-            ['tkn_mod']
+            ['tkn_mod'],
+            ['tkn_concat']
         ],
         'OP_R':[
             ['tkn_equal'],
@@ -259,6 +260,7 @@ class Parser():
             ['tkn_greater'],
             ['tkn_less'],
             ['tkn_regex'],
+            
         ],
         'OP_L':[
             ['tkn_and'],
@@ -271,10 +273,14 @@ class Parser():
             ['tkn_times_assign'],
             ['tkn_div_assign'],
             ['tkn_mod_assign'],
+        ],
+        'VAL':[
+            ['tkn_real'],
+            ['tkn_str'],
+            ['verdadero'],
+            ['cierto'],
+            ['falso']
         ]
-
-        
-        
         
     }
 
@@ -387,17 +393,32 @@ class Parser():
     def showTokenInfo(self,token):
         print("<"+str(token.token)+","+str(token.lexem)+","+str(token.line)+","+str(token.position)+">")
         
-        
-    
-    
-    
-    
     
     def reportError(self,token):
         
         if token.lexem=='assign':
-                token.lexem='<-'
-                
+                token.lexem='='
+        elif token.lexem == 'plus_assign':
+            token.lexem ='+='
+
+        elif token.lexem == 'minus_assign':
+            token.lexem ='-='
+
+        elif token.lexem == 'times_assign':
+            token.lexem ='*='      
+
+        elif token.lexem == 'div_assign':
+            token.lexem ='/='    
+
+        elif token.lexem == 'mod_assign':
+            token.lexem ='%='
+       
+        elif token.lexem == 'increment':
+            token.lexem ='++'
+        
+        elif token.lexem == 'decrement':
+            token.lexem ='--'      
+
         elif token.lexem == 'period':
             token.lexem ='.'
         
@@ -406,6 +427,9 @@ class Parser():
             
         elif token.lexem == 'colon':
             token.lexem=':'
+        
+        elif token.lexem == 'semicolon':
+            token.lexem=';'
         
         elif token.lexem == 'closing_bra':
             token.lexem=']'
@@ -418,6 +442,12 @@ class Parser():
             
         elif token.lexem == 'opening_par':
             token.lexem='('
+        
+        elif token.lexem == 'closing_key':
+            token.lexem='}'
+            
+        elif token.lexem == 'opening_key':
+            token.lexem='{'
             
         elif token.lexem == 'plus':
             token.lexem='+'
@@ -433,12 +463,21 @@ class Parser():
             
         elif token.lexem == 'power':
             token.lexem='^'
+
+        elif token.lexem == 'mod':
+            token.lexem='%'
+
+        elif token.lexem == 'concat':
+            token.lexem='..'
+        
+        elif token.lexem == 'not':
+            token.lexem='!'
             
         elif token.lexem == 'equal':
-            token.lexem='='
+            token.lexem='=='
             
         elif token.lexem == 'neq':
-            token.lexem='<>'
+            token.lexem='!='
             
         elif token.lexem == 'less':
             token.lexem='<'
@@ -451,6 +490,14 @@ class Parser():
             
         elif token.lexem == 'geq':
             token.lexem ='>='
+
+        elif token.lexem == 'regex':
+            token.lexem ='~='
+        
+        elif token.lexem == 'and':
+            token.lexem ='&&'
+        elif token.lexem == 'or':
+            token.lexem ='||'
             
         elif token.lexem == "EOF":
             token.lexem="final de archivo"
@@ -537,6 +584,8 @@ class Parser():
                 
             elif report_prediction_set[i] == 'tkn_geq':
                 report_prediction_set[i]='>='
+
+                
         
         if(len(report_prediction_set)==0):
             report_prediction_set.append('final de archivo')
