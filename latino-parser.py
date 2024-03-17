@@ -26,280 +26,259 @@ class Parser():
     error=False
     
     grammar = {
+
+        
         'P':[
-            ['R','V','F_P','M']
+            ['S']
             ],
-        'R':[
-            ['registro','id','V','fin','registro'],
-            ['empty']
-            ],
-        'V':[
-            ['V_1','V'],
-            ['empty']
-            ],
-        'V_1':[
-            ['arreglo','tkn_opening_bra','PA','tkn_closing_bra','de','T','id','V_2'],
-            ['T','id','V_2']
-            ],
-            
-        'V_1_PF':[
-            ['arreglo','tkn_opening_bra','PA','tkn_closing_bra','de','T','id'],
-            ['T','id']
-            ],
-        
-        'V_2':[
-                ['tkn_comma','id','V_2'],
-                ['empty']
-            ],
-            
-        'PA':[
-            ['tkn_integer','PAm'],
-            ],
-        'PAm':[
-            ['tkn_comma','tkn_integer','PAm'],
-            ['empty']
-            ],
-        'T':[
-            ['entero'],
-            ['real'],
-            ['booleano'],
-            ['cadena','tkn_opening_bra','tkn_integer','tkn_closing_bra'],
-            ['caracter'],
-            ['id'],
-            ],
-        'F_P':[
-            ['F','F_P'],
-            ['PR','F_P'],
-            ['empty']
-            ],
-        'F':[
-            ['funcion','id','PARp','tkn_colon','T','V','inicio','S','F_1','fin']
-            ],
-            
-        'F_1':[
-                ['retorne', 'EXP'],
-                ['empty']
-            ],
-        'PAR':[
-            ['tkn_opening_par','V_1','PAR_1','tkn_closing_par'],
-            ['empty']
-            ],
-            
-        'PAR_1':[
-                ['tkn_comma','V_1','PAR_1'],
-                ['empty']
-            ],
-        
-        'PR':[
-            ['procedimiento','id','PARp','V','inicio','S','fin']
-            ],
-        
-        'PARp':[
-            ['tkn_opening_par','PARp_1','tkn_closing_par'],
-            ['empty']
-            ],
-        'PARp_1':[
-                ['var','V_1_PF','PARp_2'],
-                ['V_1_PF','PARp_2']
-            ],
-        'PARp_2':[
-                ['tkn_comma','PARp_1'],
-                ['empty']
-            ],
-        
-        'M': [
-            ['inicio','S','fin']
-            ],
-        
         'S':[
-             ['L','S'],
-             ['CO','S'],
-             ['A','S'],
-             ['E','S'],
-             ['CA','S'],
-             ['CAL','S'],
-             ['empty'],
-            ],
-        
-        'L':[
-                ['mientras','EXP','haga','S','fin','mientras'],
-                ['repita','S','hasta','EXP'],
-                ['para','A','hasta','EXP','haga','S','fin','para'],
-            ],
-        'CO':[
-                ['si','EXP','entonces','S','CO_1','fin','si']
-                #['si','EXP_C','entonces','S','fin','si']
-            ],
-        'CO_1':[
-                #['sino','si','EXP_C','entonces','S','CO_1','fin', 'si'],
-                ['sino','S'],
-                ['empty']
-            ],
-            
+            ['S_ME','S'],
+            ['empty']
+        ],
+        'S_ME':[
+            ['FUN'],
+            ['limpiar','tkn_opening_par','tkn_closing_par'],
+            ['imprimirf','tkn_opening_par','EXP','tkn_comma','EXP','tkn_closing_par'],
+            ['PR_S'],
+            ['L_C'],
+            ['S_C'],
+            ['A'],
+            ['CO']
+        ],
+        'FUN':[
+            ['TKN_FUN','tkn_id','tkn_opening_par','AR_FUN','tkn_closing_par','OP_FUN','fin']
+        ],
+        'AR_FUN':[
+            ['tkn_id','AR_FUN2'],
+            ['empty']
+        ],
+        'AR_FUN2':[
+            ['tkn_comma','tkn_id','AR_FUN2'],
+            ['empty']
+        ],
+        'OP_FUN':[
+            ['S_M','OP_RET'],
+            ['RET_TKN','EXP'],
+        ],
+        'OP_RET':[
+            ['RET_TKN','EXP'],
+            ['empty']
+        ],
+        'RET_TKN':[
+            ['retorno'],
+            ['retornar']
+        ],
+
+        'PR_S':[
+            ['PR_TKN','tkn_opening_par','EXP_PR','tkn_closing_par'],
+        ],
+
+        'EXP_PR':[
+            ['EXP'],
+            ['empty'],
+
+        ],
+
+        'PR_TKN':[
+            ['imprimir'],
+            ['poner'],
+            ['escribir'],
+        ],
+
+        'L_C':[
+            ['F_L'],
+            ['W_L'],
+            ['D_L'],
+            ['DW_L']
+        ],
+        'F_L':[
+            ['para','tkn_id','en','rango','tkn_opening_par','ARGS','tkn_closing_par','S_M','fin'],
+        ],
+        'W_L':[
+            ['mientras','EXP','S_M','fin'],
+        ],
+        'D_L':[
+            ['desde','tkn_opening_par','tkn_id','AC','AS_OP','EXP','tkn_semicolon','EXP','tkn_semicolon','A','tkn_closing_par','S_M','fin']
+        ],
+        'DW_L':[
+            ['repetir','S_M','hasta','EXP'],
+        ],
+        'S_C':[
+            ['elegir','tkn_opening_par','EXP','tkn_closing_par','C_S_M','DEF','fin']
+        ],
+        'C_S_M':[
+            ['caso','VAL','tkn_colon','C_S2','S_M','C_S']
+        ],
+        'C_S':[
+            ['caso','VAL','tkn_colon','C_S2','S_M','C_S'],
+            ['empty']
+        ],
+        'C_S2':[
+            ['caso','VAL',':','C_S2'],
+            ['empty']
+        ],
+        'DEF':[
+            ['DEF_TKN','tkn_colon','S_M'],
+            ['empty']
+        ],
+        'DEF_TKN':[
+            ['otro'],
+            ['defecto']
+        ],
         'A':[
-                ['id','AC','tkn_assign','EXP'],
-        
-            ],
+            ['id','AC','EFF']
+        ],
         'AC':[
-                ['tkn_period','id','AC'],
-                ['tkn_opening_bra','EXP','AC_1','tkn_closing_bra','AC_2','AC'],
-                ['empty']
-            ],
-            
-        'AC_2':[
-                ['tkn_period','id','AC_2','AC'],
-                ['empty']
-            ],
-        
+            ['tkn_period','tkn_id','AC','AC_1'],
+            ['tkn_opening_bra','EXP','tkn_closing_bra','AC','AC_1'],
+            ['empty']
+        ],
         'AC_1':[
-                ['tkn_comma','EXP','AC_1'],
-                ['empty']
-            ],
-        'E':[
-                ['escriba','EXP','E_exp'],
-                ['lea','id','AC','V_2']
-            ],
-        'E_exp':[
-                ['tkn_comma','EXP','E_exp'],
-                ['empty']
-            ],
-        
-        'CAL':[
-                ['llamar','CAL_ex'],
-            ],
-        
-        'CAL_ex':[
-                ['nueva_linea'],
-                ['id','ARGS_CAL']
-            ],
-        'ARGS_CAL':[
-                ['tkn_opening_par','ARGS_EXP','tkn_closing_par'],
-                ['empty'],
-                
-            ],
-        
-        'ARGS_EXP':[
-                ['EXP','AC_1'],
-                ['empty']
-            ],
-            
-        'ARGS':[
-                ['tkn_opening_par','EXP','AC_1','tkn_closing_par'],
-            ],
-        
-        'CA':[
-                ['caso','id','AC','CA_SEC','tkn_colon','S','CA_OP','fin','caso']
-            ],
-        
-        'CA_OP':[
-                ['CA_SEC','tkn_colon','S','CA_OP'],
-                ['sino','tkn_colon','S'],
-                ['empty']
-            ],
-            
-        'CA_SEC':[
-                
-                ['VAL','CA_SEC_1']
-            ],
-        'CA_SEC_1':[
-                ['tkn_comma','VAL','CA_SEC_1'],
-                ['empty']
-            ],
-        'VAL':[
-                
-                ['tkn_integer'],
-                ['tkn_real'],
-                ['tkn_char'],
-                ['tkn_str'],
-                ['verdadero'],
-                ['falso']
-            ],
+            ['tkn_comma','tkn_id','AC'],
+            ['empty']
+        ],
+        'ASGBL':[
+            ['tkn_id','AC_EX']
+        ],
+        'EFF':[
+            ['AS_OP','CONT'],
+            ['IN_DEC']
+        ],
+        'CONT':[
+            ['EXP'],
+            ['leer','tkn_opening_par','tkn_closing_par']
+        ],
+        'CO':[
+            ['si','EXP','S_M','CO_1','fin']
+        ],
+        'CO_1':[
+            ['osi','EXP','S_M','CO_1'],
+            ['empty']
+        ],
+        'BN':[
+            ['acadena','tkn_opening_par','EXP','tkn_closing_par'],
+            ['alogico','tkn_opening_par','EXP','tkn_closing_par'],
+            ['anumero','tkn_opening_par','EXP','tkn_closing_par'],
+            ['tipo','tkn_opening_par','EXP','tkn_closing_par'],
+        ],
+        'DIC':[
+            ['tkn_opening_key','DIC_CONT','tkn_closing_key'],
+        ],
+        'DIC_CONT':[
+            ['EXP','tkn_colon','INNER','DIC_CONT2'],
+            ['empty']
+        ],
+        'DIC_CONT2':[
+            ['tkn_comma','EXP','tkn_colon','INNER','DIC_CONT2'],
+            ['empty']
+        ],
+        'LIST':[
+            ['tkn_opening_key','LIST_CONT','tkn_closing_key'],
+        ],
+        'LIST_CONT':[
+            ['INNER','LIST_CONT2'],
+            ['empty']
+        ],
+        'LIST_CONT2':[
+            ['tkn_comma','INNER','LIST_CONT2'],
+            ['empty']
+        ],
+        'INNER':[
+            ['EXP','FUNN_IN']
+        ],
+        'FUNN_IN':[
+            ['TKN_FUN','tkn_opening_par','AR_FUN','tkn_closing_par','OP_FUN','fin']
+        ],
+        'TKN_FUN':[
+            ['fun'],
+            ['funcion']
+        ],
         
         'EXP':[
-                ['Te','OP_E'],
-                ['tkn_opening_par','EXP','tkn_closing_par','OP_E'],
-            ],
-        
-        
-        
+            ['TE','OP_E'],
+            ['tkn_opening_par','EXP','tkn_closing_par','OP_E']
+        ],
         'OP_E':[
-                ['OP_A','EXP'],
-                ['OP_L','EXP'],
-                ['OP_R','OP_EA','OP_EL'],
-                ['empty']
-            ],
-            
+            ['OP_A','EXP'],
+            ['OP_L','EXP'],
+            ['OP_R','OP_EA','OP_EL'],
+            ['empty']
+        ],
         'OP_EA':[
-                ['tkn_opening_par','Te','OP_AOP','tkn_closing_par','OP_AOP'], # error partialy fixed
-                #['tkn_opening_par','Te','OP_AOP','tkn_closing_par'],
-                ['Te','OP_AOP'],
-            ],
-        
+            ['tkn_opening_par','TE','OP_AOP','tkn_closing_par','OP_AOP'],
+            ['TE','OP_AOP']
+        ],
         'OP_AOP':[
-                ['OP_A','OP_EA'],
-                ['empty']
-            ],
-            
+            ['OP_A','OP_EA'],
+            ['empty']
+        ],
         'OP_EL':[
-                ['OP_L','EXP'],
-                ['empty']
-            ],
-        
-        'Te':[
-                ['tkn_minus','Te'],
-                ['VAL'],
-                ['id','Te_id'],
-            ],
-        
-        'Te_id':[
-                
-                ['ARGS'],
-                ['AC']
-            ],
-        
+            ['OP_L','EXP'],
+            ['empty']
+        ],
+        'TE':[
+            ['tkn_plus','TE'],
+            ['tkn_not','TE'],
+            ['tkn_minus','TE'],
+            ['VAL'],
+            ['tkn_id','TE_ID'],
+            ['BN'],
+            ['DIC'],
+            ['LIST']
+        ],
+        'TE_ID':[
+            ['tkn_opening_par','ARGS_G','tkn_closing_par','TE_ID'],
+            ['tkn_opening_bra','EXP','tkn_closing_par','TE_ID'],
+            ['empty']
+        ],
+        'ARGS_G':[
+            ['EXP','ACG_1'],
+            ['empty']
+        ],
+        'ACG_1':[
+            ['tkn_comma','EXP','ACG_1'],
+            ['empty']
+        ],
+        'IN_DEC':[
+            ['tkn_plus','tkn_plus'],
+            ['tkn_minus','tkn_minus']
+        ],
         'OP_A':[
-                ['tkn_minus'],
-                ['tkn_plus'],
-                ['tkn_times'],
-                ['tkn_power'],
-                ['tkn_div'],
-                ['div'],
-                ['mod'],
-            ],
-        'EXP_C':[
-                ['tkn_opening_par','EXP_C','tkn_closing_par','EXP_C_1'],
-                ['EXP','OP_R','EXP'],
-            ],
-        
-        'EXP_C_1':[
-                ['OP_L','tkn_opening_par','EXP','OP_R','EXP','tkn_closing_par','EXP_C_1'],
-                ['empty']
-            ],
+            ['tkn_minus'],
+            ['tkn_plus'],
+            ['tkn_div'],
+            ['tkn_times'],
+            ['tkn_power'],
+            ['tkn_mod']
+        ],
         'OP_R':[
             ['tkn_equal'],
-            ['tkn_less'],
-            ['tkn_greater'],
+            ['tkn_neq'],
             ['tkn_leq'],
             ['tkn_geq'],
-            ['tkn_neq']
+            ['tkn_greater'],
+            ['tkn_less'],
+            ['tkn_regex'],
         ],
         'OP_L':[
-          ['o'],
-          ['y']
+            ['tkn_and'],
+            ['tkn_or']
         ],
+        'AS_OP':[
+            ['tkn_assign'],
+            ['tkn_plus_assign'],
+            ['tkn_minus_assign'],
+            ['tkn_times_assign'],
+            ['tkn_div_assign'],
+            ['tkn_mod_assign'],
+        ]
+
+        
         
         
     }
 
-            
-            
-            
-            
-            
-            
-    
-    
-    
+
     def analize(self,token):
         #print("*************************** Next Token *******************")
         #self.showTokenInfo(token)
