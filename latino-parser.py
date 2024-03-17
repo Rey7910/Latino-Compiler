@@ -279,7 +279,8 @@ class Parser():
             ['tkn_str'],
             ['verdadero'],
             ['cierto'],
-            ['falso']
+            ['falso'],
+            ['nulo']
         ]
         
     }
@@ -528,62 +529,111 @@ class Parser():
         
         for i in range(len(report_prediction_set)):
             
-            if report_prediction_set[i]=='tkn_assign':
-                report_prediction_set[i]='<-'
+            if report_prediction_set[i]=='tkn_and':
+                report_prediction_set[i]='&&'
                 
+            elif report_prediction_set[i] == 'tkn_or':
+                report_prediction_set[i]='||'
+            
+            elif report_prediction_set[i] == 'tkn_concat':
+                report_prediction_set[i]='..'
+
+            elif report_prediction_set[i] == 'tkn_plus_assign':
+                report_prediction_set[i]='+='
+            
+            elif report_prediction_set[i] == 'tkn_minus_assign':
+                report_prediction_set[i]='-='
+
+            elif report_prediction_set[i] == 'tkn_times_assign':
+                report_prediction_set[i]='*='
+
+            elif report_prediction_set[i] == 'tkn_div_assign':
+                report_prediction_set[i]='/='
+
+            elif report_prediction_set[i] == 'tkn_mod_assign':
+                report_prediction_set[i]='%='
+
+            elif report_prediction_set[i] == 'tkn_increment':
+                report_prediction_set[i]='++'
+
+            elif report_prediction_set[i] == 'tkn_decrement':
+                report_prediction_set[i]='--'
+
             elif report_prediction_set[i] == 'tkn_period':
                 report_prediction_set[i]='.'
-            
+
             elif report_prediction_set[i] == 'tkn_comma':
                 report_prediction_set[i]=','
-                
+
+            elif report_prediction_set[i] == 'tkn_semicolon':
+                report_prediction_set[i]=';'
+
             elif report_prediction_set[i] == 'tkn_colon':
                 report_prediction_set[i]=':'
-            
-            elif report_prediction_set[i] == 'tkn_closing_bra':
-                report_prediction_set[i]=']'
-            
+
+            elif report_prediction_set[i] == 'tkn_opening_key':
+                report_prediction_set[i]='{'
+
+            elif report_prediction_set[i] == 'tkn_closing_key':
+                report_prediction_set[i]='}'
+
             elif report_prediction_set[i] == 'tkn_opening_bra':
                 report_prediction_set[i]='['
-                
+
+            elif report_prediction_set[i] == 'tkn_closing_bra':
+                report_prediction_set[i]=']'
+
+            elif report_prediction_set[i] == 'tkn_opening_par':
+                report_prediction_set[i]='('     
+
             elif report_prediction_set[i] == 'tkn_closing_par':
                 report_prediction_set[i]=')'
-                
-            elif report_prediction_set[i] == 'tkn_opening_par':
-                report_prediction_set[i]='('
-                
+
             elif report_prediction_set[i] == 'tkn_plus':
                 report_prediction_set[i]='+'
-                
+
             elif report_prediction_set[i] == 'tkn_minus':
                 report_prediction_set[i]='-'
-                
+
             elif report_prediction_set[i] == 'tkn_times':
                 report_prediction_set[i]='*'
-                
+
             elif report_prediction_set[i] == 'tkn_div':
-                report_prediction_set[i]='/'
-                
+                report_prediction_set[i]='/'     
+
             elif report_prediction_set[i] == 'tkn_power':
-                report_prediction_set[i]='^'
-                
+                report_prediction_set[i]='^'  
+
+            elif report_prediction_set[i] == 'tkn_mod':
+                report_prediction_set[i]='%'
+            
             elif report_prediction_set[i] == 'tkn_equal':
-                report_prediction_set[i]='='
-                
+                report_prediction_set[i]='=='
+
             elif report_prediction_set[i] == 'tkn_neq':
-                report_prediction_set[i]='<>'
-                
-            elif report_prediction_set[i] == 'tkn_less':
-                report_prediction_set[i]='<'
-                
+                report_prediction_set[i]='!='
+
             elif report_prediction_set[i] == 'tkn_leq':
                 report_prediction_set[i]='<='
-                
-            elif report_prediction_set[i] == 'tkn_greater':
-                report_prediction_set[i]='>'
-                
+
             elif report_prediction_set[i] == 'tkn_geq':
                 report_prediction_set[i]='>='
+
+            elif report_prediction_set[i] == 'tkn_greater':
+                report_prediction_set[i]='>'
+
+            elif report_prediction_set[i] == 'tkn_less':
+                report_prediction_set[i]='<'
+
+            elif report_prediction_set[i] == 'tkn_regex':
+                report_prediction_set[i]='~='
+
+            elif report_prediction_set[i] == 'tkn_assign':
+                report_prediction_set[i]='='
+
+            elif report_prediction_set[i] == 'tkn_not':
+                report_prediction_set[i]='!'
+            
 
                 
         
