@@ -178,7 +178,7 @@ class Parser():
             ['empty']
         ],
         'LIST':[
-            ['tkn_opening_key','LIST_CONT','tkn_closing_key'],
+            ['tkn_opening_bra','LIST_CONT','tkn_closing_bra'],
         ],
         'LIST_CONT':[
             ['INNER','LIST_CONT2'],
@@ -189,7 +189,8 @@ class Parser():
             ['empty']
         ],
         'INNER':[
-            ['EXP','FUNN_IN']
+            ['EXP'],
+            ['FUNN_IN']
         ],
         'FUNN_IN':[
             ['TKN_FUN','tkn_opening_par','AR_FUN','tkn_closing_par','OP_FUN','fin']
