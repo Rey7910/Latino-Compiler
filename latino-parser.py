@@ -118,7 +118,7 @@ class Parser():
             ['empty']
         ],
         'C_S2':[
-            ['caso','VAL',':','C_S2'],
+            ['caso','VAL','tkn_colon','C_S2'],
             ['empty']
         ],
         'DEF':[
@@ -293,11 +293,11 @@ class Parser():
 
 
     def analize(self,token):
-        #print("*************************** Next Token *******************")
-        #self.showTokenInfo(token)
+        print("*************************** Next Token *******************")
+        self.showTokenInfo(token)
         #print("Prediction set before the match algorithm",self.prediction_set)
         match=False
-        #print("Stack before the match algorithm: ",self.stack)
+        print("Stack before the match algorithm: ",self.stack)
         
         #print("******************** Starting match process *******************")
     
