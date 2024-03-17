@@ -235,6 +235,7 @@ class Parser():
         'TE_ID':[
             ['tkn_opening_par','ARGS_G','tkn_closing_par','TE_ID'],
             ['tkn_opening_bra','EXP','tkn_closing_par','TE_ID'],
+            ['tkn_period','TE_ID']
             ['empty']
         ],
         'ARGS_G':[
