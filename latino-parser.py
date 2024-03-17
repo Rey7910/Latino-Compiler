@@ -70,7 +70,8 @@ class Parser():
         ],
         'RET_TKN':[
             ['retorno'],
-            ['retornar']
+            ['retornar'],
+            ['ret']
         ],
 
         'PR_S':[
