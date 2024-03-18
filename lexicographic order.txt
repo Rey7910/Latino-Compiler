@@ -12,7 +12,6 @@ falso
 fin
 fun
 funcion
-global
 hasta
 imprimir
 imprimirf
