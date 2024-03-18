@@ -371,7 +371,7 @@ class Parser():
                         if i!="empty":
                             self.stack.append(i)
                     
-                    print("Updated stack: ",self.stack)
+                    #print("Updated stack: ",self.stack)
                     if(len(self.stack)==0):
                         self.prediction_set.add('final de archivo')
                 
