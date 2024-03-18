@@ -116,7 +116,7 @@ class Parser():
             ['mientras','EXP','S_M','fin'],
         ],
         'D_L':[
-            ['desde','tkn_opening_par','id','AC','AS_OP','EXP','tkn_semicolon','EXP','tkn_semicolon','A','tkn_closing_par','S_M','fin']
+            ['desde','tkn_opening_par','id','AS_OP','EXP','tkn_semicolon','EXP','tkn_semicolon','A','tkn_closing_par','S_M','fin']
         ],
         'DW_L':[
             ['repetir','S_M','hasta','EXP'],
