@@ -125,15 +125,19 @@ class Parser():
             ['elegir','tkn_opening_par','EXP','tkn_closing_par','C_S_M','DEF','fin']
         ],
         'C_S_M':[
-            ['caso','VAL','tkn_colon','C_S2','S_M','C_S']
+            ['caso','N_C','tkn_colon','C_S2','S_M','C_S']
         ],
         'C_S':[
-            ['caso','VAL','tkn_colon','C_S2','S_M','C_S'],
+            ['caso','N_C','tkn_colon','C_S2','S_M','C_S'],
             ['empty']
         ],
         'C_S2':[
-            ['caso','VAL','tkn_colon','C_S2'],
+            ['caso','N_C','tkn_colon','C_S2'],
             ['empty']
+        ],
+        'N_C':[
+            ['tkn_str'],
+            ['tkn_real']
         ],
         'DEF':[
             ['DEF_TKN','tkn_colon','S_M'],
