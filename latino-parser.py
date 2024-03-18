@@ -39,6 +39,7 @@ class Parser():
             ['FUN'],
             ['limpiar','tkn_opening_par','tkn_closing_par'],
             ['imprimirf','tkn_opening_par','EXP','tkn_comma','EXP','tkn_closing_par'],
+            ['RET_TKN','EXP'],
             ['PR_S'],
             ['L_C'],
             ['S_C'],
@@ -51,7 +52,7 @@ class Parser():
 
         ],
         'FUN':[
-            ['TKN_FUN','id','tkn_opening_par','AR_FUN','tkn_closing_par','OP_FUN','fin']
+            ['TKN_FUN','id','tkn_opening_par','AR_FUN','tkn_closing_par','S_M','fin']
         ],
         'AR_FUN':[
             ['id','AR_FUN2'],
@@ -217,7 +218,7 @@ class Parser():
             ['FUNN_IN']
         ],
         'FUNN_IN':[
-            ['TKN_FUN','tkn_opening_par','AR_FUN','tkn_closing_par','OP_FUN','fin']
+            ['TKN_FUN','tkn_opening_par','AR_FUN','tkn_closing_par','S_M','fin']
         ],
         'TKN_FUN':[
             ['fun'],
