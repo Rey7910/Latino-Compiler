@@ -259,7 +259,7 @@ class Parser():
         ],
         'TE_ID':[
             ['tkn_opening_par','ARGS_G','tkn_closing_par','TE_ID'],
-            ['tkn_opening_bra','EXP','tkn_closing_par','TE_ID'],
+            ['tkn_opening_bra','EXP','tkn_closing_bra','TE_ID'],
             ['tkn_period','id','TE_ID'],
             ['empty']
         ],
@@ -371,7 +371,7 @@ class Parser():
                         if i!="empty":
                             self.stack.append(i)
                     
-                    #print("Updated stack: ",self.stack)
+                    print("Updated stack: ",self.stack)
                     if(len(self.stack)==0):
                         self.prediction_set.add('final de archivo')
                 
